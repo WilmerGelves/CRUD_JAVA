@@ -10,9 +10,9 @@ import com.hexagonaljava.infrastructure.database.ConnectionFactory;
 //import com.hexagonaljava.infrastructure.persistence.client.ClientRepositoryImpl;
 import com.hexagonaljava.infrastructure.persistence.product.ProductRepositoryImpl;
 
+@SuppressWarnings("unused")
 public class ProcesoProducto {
     public static void procesoCliente(){
-        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         int opcion;
         String menuProductos = """
@@ -23,8 +23,8 @@ public class ProcesoProducto {
                                 2. Buscar producto.
                                 3. Actualizar producto.
                                 4. Eliminar producto.
-                                5. Volver al menu anterior.
-                                6. Listar productos.
+                                5. Listar productos.
+                                6. Volver al menu anterior.
                                 7. Salir.
                                 =========================
                                """;
@@ -40,37 +40,58 @@ public class ProcesoProducto {
                 sc.nextLine();//formateo del buffer 
                 ProductRepository repositorio = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
                 ProductUseCase productUseCase = new ProductUseCase(repositorio);
+                System.out.print("Id del producto:");
+                int id = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Ingrese Nombre del producto: ");
                 String nombre = sc.nextLine();
                 System.out.print("Ingrese Stock: ");
                 int stock = sc.nextInt();
-                productUseCase.registrarproducto(nombre, stock);
+                productUseCase.registrarproducto(id,nombre, stock);
                 procesoCliente();
                 break;
             case 2: 
                 ProductRepository busqueda = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
                 ProductUseCase busquedaCase = new ProductUseCase(busqueda);
                 System.out.print("ID del producto: ");
-                int id = sc.nextInt();
-                System.out.println(busquedaCase.obtenerproducto(id)); 
+                id = sc.nextInt();
+                busquedaCase.obtenerproducto(id); 
                 procesoCliente();
                 break;
             case 3: 
+                ProductRepository actualizar = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
+                ProductUseCase procActualizar = new ProductUseCase(actualizar);
+                System.out.print("ID del producto: ");
+                id = sc.nextInt();
+                sc.nextLine();
+                System.out.print("Nuevo nombre: ");
+                nombre = sc.nextLine();
+                System.out.print("Nuevo stock: ");
+                stock = sc.nextInt();
+                procActualizar.actualizarproducto(id,nombre,stock);
                 procesoCliente();
                 break;
             case 4:
+                ProductRepository eliminar = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
+                ProductUseCase proDelete = new ProductUseCase(eliminar);
+                System.out.print("Id del producto a eliminar: ");
+                id = sc.nextInt();
+                proDelete.eliminarproducto(id);
                 procesoCliente();
                 break;
             case 5:
-                MenuPrincipal.menuCliente();
-                break;
-            case 6:
+                ProductRepository listar = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
+                ProductUseCase proListar = new ProductUseCase(listar);
+                proListar.listarproductos();
                 procesoCliente();
+            break;
+            case 6:
+                MenuPrincipal.menuCliente();
                 break;
             default:
                 System.out.println("Ha salido del sistema.\nPor favor vuelva pronto.");
                 break;
         }
-        
+       sc.close(); 
     }
 }

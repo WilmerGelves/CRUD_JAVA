@@ -6,6 +6,7 @@ import com.hexagonaljava.application.usecase.product.ProcesoProducto;
 
 public class MenuPrincipal {
     public static void menuCliente(){
+        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         int opcion;
         String mensaje = """

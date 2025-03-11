@@ -14,8 +14,8 @@ public class ProductUseCase {
         this.repository = repository;
     }
 
-    public void registrarproducto(String nombre, int stock) {
-        Product producto = new Product(nombre, stock);
+    public void registrarproducto(int id,String nombre, int stock) {
+        Product producto = new Product(id,nombre, stock);
         repository.guardar(producto);
     }
 
@@ -27,8 +27,8 @@ public class ProductUseCase {
         return repository.listarTodos();
     }
 
-    public void actualizarproducto(String nombre, int Stock) {
-        Product producto = new Product(nombre, Stock);
+    public void actualizarproducto(int id,String nombre, int Stock) {
+        Product producto = new Product(id,nombre, Stock);
         repository.actualizar(producto);
     }
 
