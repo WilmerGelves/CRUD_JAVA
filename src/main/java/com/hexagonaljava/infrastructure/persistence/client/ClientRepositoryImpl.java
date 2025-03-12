@@ -33,14 +33,20 @@ public class ClientRepositoryImpl implements ClientRespository {
     }
 
     @Override
-    public Client buscarPorId(int id) {
+    public Client buscarPorId(String id) {
         String sql = "SELECT * FROM client WHERE id = ?";
         try (Connection conexion = connection.getConexion();
              PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            stmt.setInt(1, id);
+            stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new Client(rs.getString("id"), rs.getString("name"), rs.getString("email"));
+                System.out.println("=======Resultado=======");
+                System.out.println("|" + "ID del cliente: " + rs.getString("id"));
+                System.out.println("|" + "Nombre: " + rs.getString("name"));
+                System.out.println("|" + "Email : " + rs.getString("email"));
+                System.out.println("=======================");
+            }else{
+                System.out.println("Id no encontrado.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,7 +62,7 @@ public class ClientRepositoryImpl implements ClientRespository {
              Statement stmt = conexion.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                client.add(new Client(rs.getString("id"), rs.getString("name"), rs.getString("email")));
+                System.out.println("|" + "ID: " + rs.getString("id") + " " + "|" + "Nombre: " + rs.getString("name") + " " + "|" + "Email: " + rs.getString("email")); 
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,15 +85,16 @@ public class ClientRepositoryImpl implements ClientRespository {
     }
 
     @Override
-    public void eliminar(int id) {
+    public void eliminar(String id) {
         String sql = "DELETE FROM client WHERE id = ?";
         try (Connection conexion = connection.getConexion();
              PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            stmt.setInt(1, id);
+            stmt.setString(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
 
 }

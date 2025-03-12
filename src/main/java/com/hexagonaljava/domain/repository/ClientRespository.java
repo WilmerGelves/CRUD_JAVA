@@ -6,8 +6,8 @@ import com.hexagonaljava.domain.entity.Client;
 
 public interface ClientRespository {
     void guardar(Client cliente);
-    Client buscarPorId(int id);
+    Client buscarPorId(String id);
     List<Client> listarTodos();
     void actualizar(Client cliente);
-    void eliminar(int id);
+    void eliminar(String id);
 }

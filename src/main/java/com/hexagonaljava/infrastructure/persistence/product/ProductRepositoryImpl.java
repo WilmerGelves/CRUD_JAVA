@@ -39,9 +39,11 @@ public class ProductRepositoryImpl implements ProductRepository {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                System.out.println("=======Resultado=======");
                 System.out.println("|" + "ID: " + rs.getInt("id"));
                 System.out.println("|" + "Nombre: " + rs.getString("name"));
                 System.out.println("|" + "Stock: " + rs.getInt("stock"));
+                System.out.println("=======================");
             }else{
                 System.out.println("Id no encontrado.");
             }

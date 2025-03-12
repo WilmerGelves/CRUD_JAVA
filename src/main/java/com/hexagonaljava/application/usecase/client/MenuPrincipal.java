@@ -28,9 +28,10 @@ public class MenuPrincipal {
             }
             switch (opcion) {
                 case 1:
-                    ProcesoProducto.procesoCliente();
+                    ProcesoProducto.ProcesoProducto();
                     break;
                 case 2:
+                    ProcesoClliente.procesoCliente();
                 break;
             
                 default:

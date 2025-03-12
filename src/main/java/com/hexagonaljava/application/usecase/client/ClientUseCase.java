@@ -17,7 +17,7 @@ public class ClientUseCase {
         repository.guardar(cliente);
     }
 
-    public Client obtenerCliente(int id) {
+    public Client obtenerCliente(String id) {
         return repository.buscarPorId(id);
     }
 
@@ -30,7 +30,7 @@ public class ClientUseCase {
         repository.actualizar(cliente);
     }
 
-    public void eliminarCliente(int id) {
+    public void eliminarCliente(String id) {
         repository.eliminar(id);
     }
 }

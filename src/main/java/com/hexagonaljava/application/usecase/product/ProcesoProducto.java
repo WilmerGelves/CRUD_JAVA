@@ -12,7 +12,7 @@ import com.hexagonaljava.infrastructure.persistence.product.ProductRepositoryImp
 
 @SuppressWarnings("unused")
 public class ProcesoProducto {
-    public static void procesoCliente(){
+    public static void ProcesoProducto(){
         Scanner sc = new Scanner(System.in);
         int opcion;
         String menuProductos = """
@@ -48,7 +48,7 @@ public class ProcesoProducto {
                 System.out.print("Ingrese Stock: ");
                 int stock = sc.nextInt();
                 productUseCase.registrarproducto(id,nombre, stock);
-                procesoCliente();
+                ProcesoProducto();
                 break;
             case 2: 
                 ProductRepository busqueda = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
@@ -56,7 +56,7 @@ public class ProcesoProducto {
                 System.out.print("ID del producto: ");
                 id = sc.nextInt();
                 busquedaCase.obtenerproducto(id); 
-                procesoCliente();
+                ProcesoProducto();
                 break;
             case 3: 
                 ProductRepository actualizar = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
@@ -69,7 +69,7 @@ public class ProcesoProducto {
                 System.out.print("Nuevo stock: ");
                 stock = sc.nextInt();
                 procActualizar.actualizarproducto(id,nombre,stock);
-                procesoCliente();
+                ProcesoProducto();
                 break;
             case 4:
                 ProductRepository eliminar = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
@@ -77,13 +77,13 @@ public class ProcesoProducto {
                 System.out.print("Id del producto a eliminar: ");
                 id = sc.nextInt();
                 proDelete.eliminarproducto(id);
-                procesoCliente();
+                ProcesoProducto();
                 break;
             case 5:
                 ProductRepository listar = new ProductRepositoryImpl(ConnectionFactory.crearConexion());
                 ProductUseCase proListar = new ProductUseCase(listar);
                 proListar.listarproductos();
-                procesoCliente();
+                ProcesoProducto();
             break;
             case 6:
                 MenuPrincipal.menuCliente();
